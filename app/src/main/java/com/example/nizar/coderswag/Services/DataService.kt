@@ -10,7 +10,6 @@ object DataService {
         Catagory("HOODIES","hoodieimage"),
         Catagory("HATS","hatimage"),
         Catagory("DIGITAL","digitalgoodsimage")
-
     )
 
     val hats = listOf(
