@@ -12,7 +12,7 @@ import com.example.nizar.coderswag.R
 import com.example.nizar.coderswag.R.id.categoryName
 import kotlinx.android.synthetic.main.category_list_item.view.*
 
-class CategoryRecycleAdapter(val context: Context, val categories: List<Catagory>):RecyclerView.Adapter<CategoryRecycleAdapter.Holder>() {
+class CategoryRecycleAdapter(val context: Context, val categories: List<Catagory>,val itemClick:(Catagory) -> Unit):RecyclerView.Adapter<CategoryRecycleAdapter.Holder>() {
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bindCategory(categories[position],context)
@@ -23,7 +23,7 @@ class CategoryRecycleAdapter(val context: Context, val categories: List<Catagory
             R.layout.category_list_item,parent,false
         )
 
-        return Holder(view)
+        return Holder(view,itemClick)
     }
 
     override fun getItemCount(): Int {
@@ -31,12 +31,7 @@ class CategoryRecycleAdapter(val context: Context, val categories: List<Catagory
     }
 
 
-
-
-
-
-
-    inner  class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner  class Holder(itemView: View, val itemClick: (Catagory) -> Unit) : RecyclerView.ViewHolder(itemView) {
         val categoryImage = itemView?.findViewById<ImageView>(R.id.categoryImage)
         val categoryName = itemView?.findViewById<TextView>(R.id.categoryName)
 
@@ -47,6 +42,7 @@ class CategoryRecycleAdapter(val context: Context, val categories: List<Catagory
 
             categoryImage?.setImageResource(resourceID)
             categoryName?.text =category.title
+            itemView.setOnClickListener{itemClick(category)}
 
         }
     }// end of class Holder
